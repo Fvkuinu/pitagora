@@ -1,0 +1,30 @@
+void cannon(float x1, float y1, float x2, float y2){
+  FBody c1 = new FCircle(50);
+  c1.setPosition(x1,y1);
+  c1.setFriction(4000);
+  world.add(c1);
+  FBody c2 = new FCircle(50);
+  c2.setPosition(x2,y2);
+  c2.setFriction(4000);
+  world.add(c2);
+  FCircle g1 = new FCircle(10);
+  g1.setPosition(c1.getX(), c1.getY());
+  g1.setStatic(true);
+  world.add(g1);
+  FCircle g2 = new FCircle(10);
+  g2.setPosition(c2.getX(), c2.getY());
+  g2.setStatic(true);
+  world.add(g2);
+  FRevoluteJoint j1 = new FRevoluteJoint(g1,c1);
+  j1.setAnchor(g1.getX(), g1.getY());
+  j1.setEnableMotor(true);
+  j1.setMotorSpeed(-500);
+  j1.setMaxMotorTorque(1000000);
+  world.add(j1);
+  FRevoluteJoint j2 = new FRevoluteJoint(g2,c2);
+  j2.setAnchor(g2.getX(), g2.getY());
+  j2.setEnableMotor(true);
+  j2.setMotorSpeed(500);
+  j2.setMaxMotorTorque(10000000);
+  world.add(j2);
+}
